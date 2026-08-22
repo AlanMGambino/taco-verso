@@ -68,3 +68,19 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# ========================================
+# Taco-Verso Backend
+# ========================================
+
+# Dependencias del backend
+/backend/node_modules/
+
+# Variables de entorno y secretos
+/backend/.env
+/backend/.env.*
+!/backend/.env.example
+
+# Logs del backend
+/backend/*.log
+/backend/logs/

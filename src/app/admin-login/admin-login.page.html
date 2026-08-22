@@ -1,0 +1,122 @@
+<ion-content [fullscreen]="true">
+
+  <section class="login-page">
+
+    <div class="login-card">
+
+      <div class="login-logo">
+        <img
+          src="assets/images/logo-redondo.png"
+          alt="Taco-Verso Brothers"
+        />
+      </div>
+
+
+      <div class="login-header">
+
+        <span class="login-eyebrow">
+          TACOVERSO BROTHERS
+        </span>
+
+        <h1>
+          ADMINISTRACIÓN
+        </h1>
+
+        <p>
+          Inicia sesión para administrar
+          el negocio.
+        </p>
+
+      </div>
+
+
+      <div class="login-divider"></div>
+
+
+      <form
+        (ngSubmit)="iniciarSesion()"
+        #loginForm="ngForm">
+
+
+        <!-- USUARIO -->
+
+        <label class="login-field">
+
+          <span>
+            👤 Usuario
+          </span>
+
+          <input
+            type="text"
+            name="usuario"
+            [(ngModel)]="usuario"
+            placeholder="Usuario"
+            autocomplete="username"
+            maxlength="50"
+            required
+          />
+
+        </label>
+
+
+        <!-- CONTRASEÑA -->
+
+        <label class="login-field">
+
+          <span>
+            🔐 Contraseña
+          </span>
+
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Contraseña"
+            autocomplete="current-password"
+            maxlength="100"
+            required
+          />
+
+        </label>
+
+
+        <!-- ERROR -->
+
+        <div
+          class="login-error"
+          *ngIf="error">
+
+          ⚠️ {{ error }}
+
+        </div>
+
+
+        <!-- BOTÓN -->
+
+        <button
+          type="submit"
+          class="login-button"
+          [disabled]="cargando">
+
+          <span *ngIf="!cargando">
+            ENTRAR AL PANEL
+          </span>
+
+          <span *ngIf="cargando">
+            INICIANDO SESIÓN...
+          </span>
+
+        </button>
+
+      </form>
+
+
+      <p class="login-note">
+        Acceso exclusivo para administración.
+      </p>
+
+    </div>
+
+  </section>
+
+</ion-content>

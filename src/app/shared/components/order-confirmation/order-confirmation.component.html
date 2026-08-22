@@ -1,0 +1,328 @@
+<div
+  class="confirmation-backdrop"
+  *ngIf="visible"
+  (click)="cerrarConfirmacion()">
+
+  <div
+    class="confirmation-ticket"
+    (click)="$event.stopPropagation()">
+
+    <button
+      type="button"
+      class="confirmation-close"
+      (click)="cerrarConfirmacion()">
+      ×
+    </button>
+
+
+    <!-- HEADER -->
+
+    <header class="ticket-header">
+
+      <span class="ticket-icon">
+        🧾
+      </span>
+
+      <span class="ticket-eyebrow">
+        TACOVERSO BROTHERS
+      </span>
+
+      <h2>
+        CONFIRMA TU PEDIDO
+      </h2>
+
+      <p>
+        Revisa que todo esté correcto
+        antes de enviarlo.
+      </p>
+
+    </header>
+
+
+    <div class="ticket-divider"></div>
+
+
+    <!-- CLIENTE -->
+
+    <section
+      class="ticket-section"
+      *ngIf="datosCliente">
+
+      <h3>
+        👤 DATOS DEL CLIENTE
+      </h3>
+
+      <div class="ticket-row">
+        <span>Nombre</span>
+        <strong>
+          {{ datosCliente.nombre }}
+        </strong>
+      </div>
+
+      <div class="ticket-row">
+        <span>Teléfono</span>
+        <strong>
+          {{ datosCliente.telefono }}
+        </strong>
+      </div>
+
+    </section>
+
+
+    <!-- ENTREGA -->
+
+    <section
+      class="ticket-section"
+      *ngIf="datosCliente">
+
+      <h3>
+        {{
+          datosCliente.tipoEntrega ===
+          'domicilio'
+            ? '🏠 ENTREGA A DOMICILIO'
+            : '🛍️ PICKUP'
+        }}
+      </h3>
+
+
+      <div
+        *ngIf="
+          datosCliente.tipoEntrega ===
+          'domicilio'
+        ">
+
+        <div class="delivery-data">
+
+          <strong>
+            📍 Dirección
+          </strong>
+
+          <p>
+            {{ datosCliente.direccion }}
+          </p>
+
+        </div>
+
+
+        <div
+          class="delivery-data"
+          *ngIf="datosCliente.referencia">
+
+          <strong>
+            🔎 Referencias
+          </strong>
+
+          <p>
+            {{ datosCliente.referencia }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p
+        class="pickup-message"
+        *ngIf="
+          datosCliente.tipoEntrega ===
+          'pickup'
+        ">
+
+        El pedido será recogido
+        directamente en TacoVerso.
+
+      </p>
+
+    </section>
+
+
+    <!-- PEDIDO -->
+
+    <section class="ticket-section">
+
+      <h3>
+        🛒 TU PEDIDO
+      </h3>
+
+
+      <article
+        class="confirmation-item"
+        *ngFor="
+          let item of carrito
+        ">
+
+        <div class="item-header">
+
+          <div>
+
+            <strong>
+
+              {{ item.cantidad }}x
+
+              {{
+                item.tipo === 'Refresco'
+                  ? item.nombre
+                  : item.tipo + ' de ' +
+                    item.nombre
+              }}
+
+            </strong>
+
+          </div>
+
+
+          <strong class="item-price">
+
+            ${{
+              item.precioUnitario *
+              item.cantidad
+            }}
+
+          </strong>
+
+        </div>
+
+
+        <!-- PREPARACIÓN -->
+
+        <div
+          class="item-preparation"
+          *ngIf="
+            item.tipo !== 'Refresco'
+          ">
+
+          <span
+            *ngIf="
+              item.tipo === 'Taco'
+            ">
+
+            🧀
+            {{
+              item.queso
+                ? 'Con queso'
+                : 'Sin queso'
+            }}
+
+          </span>
+
+
+          <span
+            *ngIf="
+              item.tipo === 'Torta'
+            ">
+
+            🧀 Queso incluido
+
+          </span>
+
+
+          <span>
+            🍟
+            {{
+              item.complementos?.papas
+                ? 'Papas: Sí'
+                : 'Papas: No'
+            }}
+          </span>
+
+
+          <span>
+            🧅
+            {{
+              item.complementos
+                ?.cebollitas
+                ? 'Cebollitas: Sí'
+                : 'Cebollitas: No'
+            }}
+          </span>
+
+
+          <span>
+            🌵
+            {{
+              item.complementos?.nopales
+                ? 'Nopales: Sí'
+                : 'Nopales: No'
+            }}
+          </span>
+
+        </div>
+
+
+        <small class="unit-price">
+          ${{ item.precioUnitario }} c/u
+        </small>
+
+      </article>
+
+    </section>
+
+
+    <!-- INDICACIONES -->
+
+    <section
+      class="ticket-section"
+      *ngIf="
+        datosCliente?.indicaciones
+      ">
+
+      <h3>
+        📝 INDICACIONES
+      </h3>
+
+      <p class="instructions-text">
+        {{ datosCliente.indicaciones }}
+      </p>
+
+    </section>
+
+
+    <!-- TOTAL -->
+
+    <div class="ticket-total">
+
+      <span>
+        TOTAL
+      </span>
+
+      <strong>
+        ${{ total }} MXN
+      </strong>
+
+    </div>
+
+
+    <!-- BOTONES -->
+
+    <div class="confirmation-actions">
+
+      <button
+        type="button"
+        class="correct-button"
+        (click)="corregirPedido()">
+
+        ← CORREGIR
+
+      </button>
+
+
+      <button
+        type="button"
+        class="whatsapp-button"
+        (click)="enviarPedido()">
+
+        📱 ENVIAR POR WHATSAPP
+
+      </button>
+
+    </div>
+
+
+    <p class="ticket-note">
+      WhatsApp se abrirá con el pedido
+      listo para enviar.
+    </p>
+
+  </div>
+
+</div>

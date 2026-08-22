@@ -1,0 +1,188 @@
+<div
+  class="menu-row"
+  [class.image-right]="imagePosition === 'right'">
+
+  <!-- FOTO -->
+  <div class="menu-photo" *ngIf="image">
+
+    <div class="photo-frame">
+
+      <img
+        [src]="image"
+        [alt]="title"
+      />
+
+      <div class="photo-overlay"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TARJETA -->
+  <article class="comic-card">
+
+    <div class="web-decoration web-top-left"></div>
+    <div class="web-decoration web-bottom-right"></div>
+
+    <div class="card-content">
+
+      <!-- TÍTULO -->
+      <div class="card-title">
+
+        <span
+          class="title-icon"
+          *ngIf="icon">
+          {{ icon }}
+        </span>
+
+        <h3>
+          {{ title }}
+        </h3>
+
+      </div>
+
+      <div class="comic-divider"></div>
+
+
+      <!-- PRODUCTOS + PRECIO -->
+      <div class="product-layout">
+
+        <div class="product-list">
+
+          <div
+            class="product-item"
+            *ngFor="let item of items">
+
+            <span>
+              {{ item }}
+            </span>
+
+            <span class="dots"></span>
+
+          </div>
+
+        </div>
+
+
+        <!-- EXPLOSIÓN -->
+        <div class="price-burst">
+
+          <div class="burst-shape"></div>
+
+          <div class="burst-content">
+
+            <span
+              class="price-label"
+              *ngIf="priceLabel">
+
+              {{ priceLabel }}
+
+            </span>
+
+            <strong>
+              {{ price }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- NOTA -->
+      <div
+        class="extra-note"
+        *ngIf="noteTitle || noteText || notePrice">
+
+        <span
+          class="note-icon"
+          *ngIf="noteIcon">
+
+          {{ noteIcon }}
+
+        </span>
+
+        <div>
+
+          <strong *ngIf="noteTitle">
+            {{ noteTitle }}
+          </strong>
+
+          <p *ngIf="noteText || notePrice">
+
+            {{ noteText }}
+
+            <b *ngIf="notePrice">
+              {{ notePrice }}
+            </b>
+
+          </p>
+
+        </div>
+
+      </div>
+
+<!-- COMPLEMENTOS -->
+
+<div
+  class="menu-info-note"
+  *ngIf="showComplements">
+
+  <span class="menu-info-icon">
+    🍟
+  </span>
+
+  <div>
+    <strong>
+      Complementos incluidos
+    </strong>
+
+    <p>
+      {{ complementsText }}
+    </p>
+  </div>
+
+</div>
+
+
+<!-- SALSAS -->
+
+<div
+  class="menu-info-note sauce-note"
+  *ngIf="showSauces">
+
+  <span class="menu-info-icon">
+    🌶️
+  </span>
+
+  <div>
+    <strong>
+      Salsas
+    </strong>
+
+    <p>
+      {{ saucesText }}
+    </p>
+  </div>
+
+</div>
+
+
+<!-- ORDENAR -->
+
+<button
+  type="button"
+  class="order-now-button"
+  (click)="irAOrdenar()">
+
+  🌮 ORDENAR AHORA
+
+</button>
+
+    </div>
+
+  </article>
+
+</div>

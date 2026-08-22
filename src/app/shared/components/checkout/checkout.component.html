@@ -1,0 +1,295 @@
+<div
+  class="checkout-backdrop"
+  *ngIf="visible"
+  (click)="cerrarCheckout()">
+
+
+  <div
+    class="checkout-card"
+    (click)="$event.stopPropagation()">
+
+
+    <!-- CERRAR -->
+
+    <button
+      type="button"
+      class="checkout-close"
+      (click)="cerrarCheckout()">
+
+      ×
+
+    </button>
+
+
+    <!-- ENCABEZADO -->
+
+    <header class="checkout-header">
+
+      <span class="checkout-eyebrow">
+        TACOVERSO BROTHERS
+      </span>
+
+      <h2>
+        FINALIZA TU PEDIDO
+      </h2>
+
+      <p>
+        Ya casi está listo 🌮
+      </p>
+
+    </header>
+
+
+    <div class="comic-divider"></div>
+
+
+    <!-- ENTREGA -->
+
+    <section class="checkout-section">
+
+      <h3>
+        ¿CÓMO QUIERES TU PEDIDO?
+      </h3>
+
+
+      <div class="delivery-options">
+
+
+        <button
+          type="button"
+          [class.active]="
+            tipoEntrega === 'pickup'
+          "
+          (click)="
+            seleccionarEntrega('pickup')
+          ">
+
+          <span>🛍️</span>
+
+          <strong>
+            PICKUP
+          </strong>
+
+          <small>
+            Recoger en TacoVerso
+          </small>
+
+        </button>
+
+
+        <button
+          type="button"
+          [class.active]="
+            tipoEntrega === 'domicilio'
+          "
+          (click)="
+            seleccionarEntrega('domicilio')
+          ">
+
+          <span>🏠</span>
+
+          <strong>
+            DOMICILIO
+          </strong>
+
+          <small>
+            Llevamos tu pedido
+          </small>
+
+        </button>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- DATOS -->
+
+    <section class="checkout-section">
+
+      <h3>
+        TUS DATOS
+      </h3>
+
+
+      <label class="form-field">
+
+        <span>
+          👤 Nombre *
+        </span>
+
+        <input
+          type="text"
+          [(ngModel)]="nombre"
+          placeholder="¿A nombre de quién?"
+          autocomplete="name"
+          maxlength="60"
+        />
+
+      </label>
+
+
+      <label class="form-field">
+
+        <span>
+          📱 Teléfono *
+        </span>
+
+        <input
+          type="tel"
+          [(ngModel)]="telefono"
+          placeholder="10 dígitos"
+          autocomplete="tel"
+          inputmode="tel"
+          maxlength="15"
+        />
+
+      </label>
+
+
+      <!-- SOLO DOMICILIO -->
+
+      <div
+        class="delivery-address"
+        *ngIf="
+          tipoEntrega === 'domicilio'
+        ">
+
+
+        <label class="form-field">
+
+          <span>
+            📍 Dirección *
+          </span>
+
+          <textarea
+            [(ngModel)]="direccion"
+            placeholder="Calle, número, colonia..."
+            maxlength="200"
+            rows="3">
+          </textarea>
+
+        </label>
+
+
+        <label class="form-field">
+
+          <span>
+            🏠 Referencias
+          </span>
+
+          <textarea
+            [(ngModel)]="referencia"
+            placeholder="Ej. Portón negro, frente a..."
+            maxlength="200"
+            rows="2">
+          </textarea>
+
+        </label>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- INDICACIONES -->
+
+    <section class="checkout-section">
+
+      <h3>
+        INDICACIONES
+      </h3>
+
+
+      <label class="form-field">
+
+        <span>
+          📝 ¿Algo que debamos saber?
+        </span>
+
+        <textarea
+          [(ngModel)]="indicaciones"
+          placeholder="Ej. Salsa aparte, tocar el timbre..."
+          maxlength="300"
+          rows="3">
+        </textarea>
+
+        <small class="optional-text">
+          Opcional
+        </small>
+
+      </label>
+
+    </section>
+
+
+    <!-- ERROR -->
+
+    <div
+      class="checkout-error"
+      *ngIf="error">
+
+      ⚠️ {{ error }}
+
+    </div>
+
+
+    <!-- RESUMEN -->
+
+    <div class="checkout-summary">
+
+      <div>
+
+        <span>
+          Productos
+        </span>
+
+        <strong>
+          {{ cantidadProductos }}
+        </strong>
+
+      </div>
+
+
+      <div class="summary-total">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          ${{ total }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONTINUAR -->
+
+    <button
+      type="button"
+      class="review-button"
+      (click)="continuarPedido()">
+
+      REVISAR PEDIDO
+
+      <span>
+        →
+      </span>
+
+    </button>
+
+
+    <p class="checkout-note">
+      Todavía podrás revisar todo antes
+      de enviarlo por WhatsApp.
+    </p>
+
+
+  </div>
+
+</div>

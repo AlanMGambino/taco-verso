@@ -1,20 +1,902 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <section class="hero">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div
+  class="hero-logo"
+  (click)="scrollToMenu()"
+  role="button"
+  tabindex="0"
+  aria-label="Ir al menú"
+>
+  <img
+    src="assets/images/logo-redondo.png"
+    alt="Tacoverso Brothers"
+  />
+</div>
+
+    <div
+  class="business-status"
+  [class.business-closed]="!negocioAbierto">
+
+  <span class="status-dot"></span>
+
+  <span>
+    {{
+      negocioAbierto
+        ? 'ABIERTO'
+        : 'CERRADO'
+    }}
+  </span>
+
+</div>
+
+    <div
+  class="scroll-indicator"
+  (click)="scrollToMenu()"
+  role="button"
+  tabindex="0"
+  aria-label="Ir al menú"
+>
+      <span>Desliza para conocer nuestro menú</span>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </div>
+
+  </section>
+
+  <!-- =========================
+     NUESTRO MENÚ
+     ========================= -->
+<section
+  id="menu"
+  class="menu-section"
+>
+
+  <div class="menu-header">
+    <span class="menu-eyebrow">TACOVERSO BROTHERS</span>
+    <h2>NUESTRO MENÚ</h2>
+    <div class="title-line"></div>
+    <p>Elige tu favorito y arma tu pedido.</p>
   </div>
+
+  <app-menu-card
+  title="TACOS"
+  icon="🌮"
+
+  price="$30"
+  priceLabel="C/U"
+
+  [items]="tacos"
+
+  image="assets/menu/Taco.jpg"
+  imagePosition="left"
+
+  noteIcon="🧀"
+  noteTitle="¿Lo quieres con queso?"
+  noteText="Agrega queso por"
+  notePrice="+$10"
+
+  [showComplements]="true"
+  [showSauces]="true"
+
+  (ordenarAhora)="scrollToOrder()">
+</app-menu-card>
+
+
+<app-menu-card
+  title="TORTAS"
+  icon="🥖"
+
+  price="$50"
+  priceLabel="C/U"
+
+  [items]="tortas"
+
+  image="assets/menu/Torta.jpg"
+  imagePosition="right"
+
+  noteIcon="🧀"
+  noteTitle="Todas las tortas llevan queso"
+
+  [showComplements]="true"
+  [showSauces]="true"
+
+  (ordenarAhora)="scrollToOrder()">
+</app-menu-card>
+
+
+<app-menu-card
+  title="REFRESCOS"
+  icon="🥤"
+
+  price="$25"
+  priceLabel="C/U"
+
+  [items]="refrescos"
+
+  image="assets/menu/Boing.png"
+  imagePosition="left"
+
+  (ordenarAhora)="scrollToOrder()">
+</app-menu-card>
+
+</section>
+
+<section class="location-section">
+
+  <div class="location-header">
+    <span class="location-eyebrow">
+      TACOVERSO BROTHERS
+    </span>
+
+    <h2>ENCUÉNTRANOS</h2>
+
+    <div class="location-line"></div>
+
+    <p>
+      Ven por tus tacos o haz tu pedido con nosotros.
+    </p>
+  </div>
+
+
+  <div class="location-grid">
+
+    <!-- MAPA -->
+    <div class="map-frame">
+      <iframe
+        src="https://www.google.com/maps?q=19.5229524,-99.0414809&z=17&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+
+    <!-- TARJETA -->
+    <article class="location-card">
+
+      <div class="location-web web-location-top"></div>
+      <div class="location-web web-location-bottom"></div>
+
+      <div class="location-card-content">
+
+        <span class="location-icon">📍</span>
+
+        <h3>¿DÓNDE ESTAMOS?</h3>
+
+        <div class="location-divider"></div>
+
+
+        <div class="location-info">
+
+          <div class="info-block">
+            <span class="info-icon">📌</span>
+
+            <div>
+              <strong>Dirección</strong>
+
+              <p>
+                Cda. Pueblo Nuevo 32<br>
+                Emiliano Zapata 1a Secc.<br>
+                Ecatepec de Morelos, Méx.
+              </p>
+            </div>
+          </div>
+
+
+          <div class="info-block">
+            <span class="info-icon">🕐</span>
+
+            <div>
+              <strong>Horario</strong>
+
+              <p>
+                Jueves a Domingo
+               </p>
+               <p> 
+                15:00 a 22:00 Hrs
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+
+        <a
+          class="directions-button"
+          href="https://maps.app.goo.gl/R4F3nT2TKtfzb47SA"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <span>📍</span>
+          CÓMO LLEGAR
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     ORDENAR
+     ========================= -->
+
+<section
+  id="ordenar"
+  class="order-section">
+
+  <div
+  class="closed-order-message"
+  *ngIf="!negocioAbierto">
+
+  <span class="closed-icon">
+    🌮
+  </span>
+
+  <div>
+    <strong>
+      EN ESTE MOMENTO ESTAMOS CERRADOS
+    </strong>
+
+    <p>
+      Puedes consultar nuestro menú,
+      pero los pedidos están temporalmente
+      deshabilitados.
+    </p>
+  </div>
+
+</div>
+
+  <!-- ENCABEZADO -->
+
+  <div class="order-header">
+
+    <span class="order-eyebrow">
+      TACOVERSO BROTHERS
+    </span>
+
+    <h2>
+      ARMA TU PEDIDO
+    </h2>
+
+    <div class="order-line"></div>
+
+    <p>
+      Elige tus favoritos y personalízalos
+      como más te gusten.
+    </p>
+
+  </div>
+
+
+  <div class="order-grid">
+
+
+    <!-- =====================
+         PRODUCTOS
+         ===================== -->
+
+    <div class="order-products">
+
+
+      <!-- TACOS -->
+
+      <div class="order-category">
+
+        <div class="category-title">
+
+          <span>🌮</span>
+
+          <div>
+            <small>DESDE $30</small>
+            <h3>TACOS</h3>
+          </div>
+
+        </div>
+
+
+        <div
+          class="order-product"
+          *ngFor="let taco of tacos">
+
+          <div class="product-info">
+
+            <strong>
+              {{ taco }}
+            </strong>
+
+            <span>
+              $30
+            </span>
+
+          </div>
+
+
+          <button
+  type="button"
+  class="personalize-button"
+
+  [disabled]="
+    !negocioAbierto ||
+    !productoDisponible(
+      taco,
+      'Taco'
+    )
+  "
+
+  [class.sold-out-button]="
+    negocioAbierto &&
+    !productoDisponible(
+      taco,
+      'Taco'
+    )
+  "
+
+  [class.closed-store-button]="
+    !negocioAbierto
+  "
+
+  (click)="
+    abrirPersonalizador(
+      taco,
+      'Taco',
+      30
+    )
+  ">
+
+  {{
+    !negocioAbierto
+      ? 'TIENDA CERRADA'
+      : !productoDisponible(
+          taco,
+          'Taco'
+        )
+        ? 'AGOTADO'
+        : 'PERSONALIZAR'
+  }}
+
+</button>
+
+        </div>
+
+      </div>
+
+
+      <!-- TORTAS -->
+
+      <div class="order-category">
+
+        <div class="category-title">
+
+          <span>🥖</span>
+
+          <div>
+            <small>$50 C/U</small>
+            <h3>TORTAS</h3>
+          </div>
+
+        </div>
+
+
+        <div
+          class="order-product"
+          *ngFor="let torta of tortas">
+
+          <div class="product-info">
+
+            <strong>
+              {{ torta }}
+            </strong>
+
+            <span>
+              $50
+            </span>
+
+          </div>
+
+
+          <button
+  type="button"
+  class="personalize-button"
+
+  [disabled]="
+    !negocioAbierto ||
+    !productoDisponible(
+      torta,
+      'Torta'
+    )
+  "
+
+  [class.sold-out-button]="
+    negocioAbierto &&
+    !productoDisponible(
+      torta,
+      'Torta'
+    )
+  "
+
+  [class.closed-store-button]="
+    !negocioAbierto
+  "
+
+  (click)="
+    abrirPersonalizador(
+      torta,
+      'Torta',
+      50
+    )
+  ">
+
+  {{
+    !negocioAbierto
+      ? 'TIENDA CERRADA'
+      : !productoDisponible(
+          torta,
+          'Torta'
+        )
+        ? 'AGOTADO'
+        : 'PERSONALIZAR'
+  }}
+
+</button>
+
+        </div>
+
+      </div>
+
+
+      <!-- REFRESCOS -->
+
+      <div class="order-category">
+
+        <div class="category-title">
+
+          <span>🥤</span>
+
+          <div>
+            <small>$25 C/U</small>
+            <h3>REFRESCOS</h3>
+          </div>
+
+        </div>
+
+
+        <div
+          class="order-product"
+          *ngFor="
+            let refresco
+            of refrescos
+          ">
+
+          <div class="product-info">
+
+            <strong>
+              {{ refresco }}
+            </strong>
+
+            <span>
+              $25
+            </span>
+
+          </div>
+
+
+          <button
+  type="button"
+  class="add-drink-button"
+
+  [disabled]="
+    !negocioAbierto ||
+    !productoDisponible(
+      refresco,
+      'Refresco'
+    )
+  "
+
+  [class.sold-out-button]="
+    negocioAbierto &&
+    !productoDisponible(
+      refresco,
+      'Refresco'
+    )
+  "
+
+  [class.closed-store-button]="
+    !negocioAbierto
+  "
+
+  (click)="
+    agregarRefresco(
+      refresco
+    )
+  ">
+
+  {{
+    !negocioAbierto
+      ? 'TIENDA CERRADA'
+      : !productoDisponible(
+          refresco,
+          'Refresco'
+        )
+        ? 'AGOTADO'
+        : '+ AGREGAR'
+  }}
+
+</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================
+         CARRITO
+         ===================== -->
+
+    <aside class="cart-card">
+
+      <div class="cart-header">
+
+        <div>
+
+          <span class="cart-eyebrow">
+            TU SELECCIÓN
+          </span>
+
+          <h3>
+            🛒 TU PEDIDO
+          </h3>
+
+        </div>
+
+
+        <span
+          class="cart-count"
+          *ngIf="
+            cantidadProductos > 0
+          ">
+
+          {{ cantidadProductos }}
+
+        </span>
+
+      </div>
+
+
+      <!-- CARRITO VACÍO -->
+
+      <div
+        class="empty-cart"
+        *ngIf="
+          carrito.length === 0
+        ">
+
+        <span>
+          🌮
+        </span>
+
+        <strong>
+          Tu carrito está vacío
+        </strong>
+
+        <p>
+          Agrega algo rico
+          para comenzar.
+        </p>
+
+      </div>
+
+
+      <!-- PRODUCTOS -->
+
+      <div
+        class="cart-item"
+        *ngFor="
+          let item of carrito;
+          let i = index
+        ">
+
+
+        <div class="cart-item-top">
+
+          <div class="cart-item-name">
+
+            <span>
+              {{
+                item.tipo === 'Taco'
+                  ? '🌮'
+                  : item.tipo === 'Torta'
+                    ? '🥖'
+                    : '🥤'
+              }}
+            </span>
+
+
+            <div>
+
+              <strong>
+                {{ item.tipo }}
+                de
+                {{ item.nombre }}
+              </strong>
+
+              <small>
+                ${{ item.precioUnitario }}
+                c/u
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="delete-item"
+            (click)="
+              eliminarProducto(i)
+            "
+            aria-label="Eliminar producto">
+
+            ×
+
+          </button>
+
+        </div>
+
+
+        <!-- PREPARACIÓN -->
+
+        <div
+          class="preparation"
+          *ngIf="
+            item.tipo !==
+            'Refresco'
+          ">
+
+
+          <!-- QUESO -->
+
+          <span
+            *ngIf="
+              item.tipo === 'Taco'
+            "
+            [class.selected]="
+              item.queso
+            ">
+
+            🧀
+            {{
+              item.queso
+                ? 'Con queso'
+                : 'Sin queso'
+            }}
+
+          </span>
+
+
+          <span
+            *ngIf="
+              item.tipo === 'Torta'
+            "
+            class="selected">
+
+            🧀 Queso incluido
+
+          </span>
+
+
+          <!-- PAPAS -->
+
+          <span
+            [class.selected]="
+              item.complementos?.papas
+            ">
+
+            🍟
+            {{
+              item.complementos?.papas
+                ? 'Papas'
+                : 'Sin papas'
+            }}
+
+          </span>
+
+
+          <!-- CEBOLLITAS -->
+
+          <span
+            [class.selected]="
+              item.complementos?.cebollitas
+            ">
+
+            🧅
+            {{
+              item.complementos?.cebollitas
+                ? 'Cebollitas'
+                : 'Sin cebollitas'
+            }}
+
+          </span>
+
+
+          <!-- NOPALES -->
+
+          <span
+            [class.selected]="
+              item.complementos?.nopales
+            ">
+
+            🌵
+            {{
+              item.complementos?.nopales
+                ? 'Nopales'
+                : 'Sin nopales'
+            }}
+
+          </span>
+
+        </div>
+
+
+        <!-- CANTIDAD -->
+
+        <div class="cart-item-bottom">
+
+          <div class="quantity-control">
+
+            <button
+              type="button"
+              (click)="
+                disminuirCantidadCarrito(i)
+              ">
+
+              −
+
+            </button>
+
+
+            <strong>
+              {{ item.cantidad }}
+            </strong>
+
+
+            <button
+              type="button"
+              (click)="
+                aumentarCantidadCarrito(i)
+              ">
+
+              +
+
+            </button>
+
+          </div>
+
+
+          <strong class="item-subtotal">
+
+            ${{
+              item.precioUnitario *
+              item.cantidad
+            }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOTAL -->
+
+      <div
+        class="cart-summary"
+        *ngIf="
+          carrito.length > 0
+        ">
+
+        <div>
+
+          <span>
+            Total
+          </span>
+
+          <strong>
+            ${{ totalPedido }}
+          </strong>
+
+        </div>
+
+
+        <button
+  type="button"
+  class="continue-button"
+
+  [disabled]="
+    !negocioAbierto ||
+    carrito.length === 0
+  "
+
+  [class.closed-store-button]="
+    !negocioAbierto
+  "
+
+  (click)="abrirCheckout()">
+
+  {{
+    negocioAbierto
+      ? 'CONTINUAR PEDIDO'
+      : 'TIENDA CERRADA'
+  }}
+
+  <span *ngIf="negocioAbierto">
+    →
+  </span>
+
+</button>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</section>
+
+<app-product-customizer
+
+  [visible]="customizerVisible"
+
+  [nombre]="productoSeleccionado.nombre"
+
+  [tipo]="productoSeleccionado.tipo"
+
+  [precioBase]="productoSeleccionado.precio"
+
+  (cerrar)="cerrarPersonalizador()"
+
+  (agregar)="agregarProductoPersonalizado($event)">
+
+</app-product-customizer>
+
+<app-checkout
+
+  [visible]="checkoutVisible"
+
+  [total]="totalPedido"
+
+  [cantidadProductos]="cantidadProductos"
+
+  (cerrar)="cerrarCheckout()"
+
+  (continuar)="
+    recibirDatosCheckout($event)
+  ">
+
+</app-checkout>
+
+<app-order-confirmation
+
+  [visible]="confirmacionVisible"
+
+  [carrito]="carrito"
+
+  [datosCliente]="datosCliente"
+
+  [total]="totalPedido"
+
+  (cerrar)="cerrarConfirmacion()"
+
+  (corregir)="corregirPedido()"
+
+  (enviar)="enviarPedidoWhatsApp()">
+
+</app-order-confirmation>
 </ion-content>

@@ -1,0 +1,184 @@
+<ion-content [fullscreen]="true">
+
+  <section class="admin-page">
+
+    <header class="admin-header">
+
+      <span class="admin-eyebrow">
+        TACOVERSO BROTHERS
+      </span>
+
+      <h1>
+        PANEL ADMINISTRATIVO
+      </h1>
+
+      <p>
+        Controla el estado del negocio
+        y la disponibilidad del menú.
+      </p>
+
+    </header>
+
+    <div class="admin-actions">
+
+  <button
+    type="button"
+    class="logout-button"
+    (click)="cerrarSesion()">
+
+    🔒 CERRAR SESIÓN
+
+  </button>
+
+</div>
+
+    <!-- ESTADO -->
+
+    <section class="admin-card status-card">
+
+      <div>
+
+        <span class="card-label">
+          ESTADO DEL NEGOCIO
+        </span>
+
+        <h2
+          [class.open]="negocioAbierto"
+          [class.closed]="!negocioAbierto">
+
+          {{
+            negocioAbierto
+              ? '🟢 ABIERTO'
+              : '🔴 CERRADO'
+          }}
+
+        </h2>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="status-button"
+        [class.close-business]="negocioAbierto"
+        [class.open-business]="!negocioAbierto"
+        (click)="toggleNegocio()">
+
+        {{
+          negocioAbierto
+            ? 'CERRAR NEGOCIO'
+            : 'ABRIR NEGOCIO'
+        }}
+
+      </button>
+
+    </section>
+
+
+    <!-- TACOS -->
+
+    <section class="admin-card">
+
+      <h2>
+        🌮 TACOS
+      </h2>
+
+      <div
+        class="product-admin-row"
+        *ngFor="let producto of tacos">
+
+        <span>
+          {{ producto.nombre }}
+        </span>
+
+        <button
+          type="button"
+          [class.available]="producto.disponible"
+          [class.unavailable]="!producto.disponible"
+          (click)="toggleProducto(producto)">
+
+          {{
+            producto.disponible
+              ? 'DISPONIBLE'
+              : 'AGOTADO'
+          }}
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- TORTAS -->
+
+    <section class="admin-card">
+
+      <h2>
+        🥖 TORTAS
+      </h2>
+
+      <div
+        class="product-admin-row"
+        *ngFor="let producto of tortas">
+
+        <span>
+          {{ producto.nombre }}
+        </span>
+
+        <button
+          type="button"
+          [class.available]="producto.disponible"
+          [class.unavailable]="!producto.disponible"
+          (click)="toggleProducto(producto)">
+
+          {{
+            producto.disponible
+              ? 'DISPONIBLE'
+              : 'AGOTADO'
+          }}
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- REFRESCOS -->
+
+    <section class="admin-card">
+
+      <h2>
+        🥤 REFRESCOS
+      </h2>
+
+      <div
+        class="product-admin-row"
+        *ngFor="let producto of refrescos">
+
+        <span>
+          {{ producto.nombre }}
+        </span>
+
+        <button
+          type="button"
+          [class.available]="producto.disponible"
+          [class.unavailable]="!producto.disponible"
+          (click)="toggleProducto(producto)">
+
+          {{
+            producto.disponible
+              ? 'DISPONIBLE'
+              : 'AGOTADO'
+          }}
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</ion-content>

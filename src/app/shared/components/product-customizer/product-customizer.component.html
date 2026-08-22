@@ -1,0 +1,196 @@
+<div
+  class="modal-backdrop"
+  *ngIf="visible"
+  (click)="cerrarModal()">
+
+  <div
+    class="customizer-card"
+    (click)="$event.stopPropagation()">
+
+    <button
+      type="button"
+      class="close-button"
+      (click)="cerrarModal()">
+      ×
+    </button>
+
+    <div class="customizer-title">
+
+      <span>
+        {{ tipo === 'Taco' ? '🌮' : '🥖' }}
+      </span>
+
+      <div>
+        <small>PERSONALIZA TU</small>
+
+        <h3>
+          {{ tipo | uppercase }} DE {{ nombre | uppercase }}
+        </h3>
+      </div>
+
+    </div>
+
+    <div class="comic-divider"></div>
+
+
+    <!-- QUESO -->
+
+    <div
+      class="option-section"
+      *ngIf="permiteQuesoExtra">
+
+      <h4>🧀 Queso</h4>
+
+      <label class="check-option">
+
+        <input
+  type="checkbox"
+  [(ngModel)]="queso"
+  (ngModelChange)="actualizarTotal()"
+/>
+
+        <span class="custom-check"></span>
+
+        <span class="option-text">
+          Agregar queso
+        </span>
+
+        <strong>+$10</strong>
+
+      </label>
+
+    </div>
+
+
+    <!-- TORTA -->
+
+    <div
+      class="included-cheese"
+      *ngIf="tipo === 'Torta'">
+
+      🧀 El queso ya está incluido
+
+    </div>
+
+
+    <!-- COMPLEMENTOS -->
+
+    <div class="option-section">
+
+      <h4>Complementos incluidos</h4>
+
+      <p class="section-description">
+        Selecciona únicamente los que quieras.
+      </p>
+
+
+      <label class="check-option">
+
+        <input
+          type="checkbox"
+          [(ngModel)]="papas"
+        />
+
+        <span class="custom-check"></span>
+
+        <span class="option-text">
+          🍟 Papas a la francesa
+        </span>
+
+        <small>Incluidas</small>
+
+      </label>
+
+
+      <label class="check-option">
+
+        <input
+          type="checkbox"
+          [(ngModel)]="cebollitas"
+        />
+
+        <span class="custom-check"></span>
+
+        <span class="option-text">
+          🧅 Cebollitas
+        </span>
+
+        <small>Incluidas</small>
+
+      </label>
+
+
+      <label class="check-option">
+
+        <input
+          type="checkbox"
+          [(ngModel)]="nopales"
+        />
+
+        <span class="custom-check"></span>
+
+        <span class="option-text">
+          🌵 Nopales
+        </span>
+
+        <small>Incluidos</small>
+
+      </label>
+
+    </div>
+
+
+    <!-- CANTIDAD -->
+
+    <div class="quantity-section">
+
+      <span>Cantidad</span>
+
+      <div class="quantity-control">
+
+        <button
+          type="button"
+          (click)="disminuirCantidad()">
+          −
+        </button>
+
+        <strong>
+          {{ cantidad }}
+        </strong>
+
+        <button
+          type="button"
+          (click)="aumentarCantidad()">
+          +
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TOTAL -->
+
+    <div class="customizer-total">
+
+      <span>Total</span>
+
+      <strong>
+  ${{ totalActual }}
+</strong>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-order-button"
+      (click)="agregarAlPedido()">
+
+      🌮 AGREGAR AL PEDIDO
+
+    </button>
+
+  </div>
+
+</div>

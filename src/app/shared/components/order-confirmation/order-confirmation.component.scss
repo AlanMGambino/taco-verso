@@ -1,0 +1,506 @@
+.confirmation-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 11000;
+
+  padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    rgba(5, 5, 8, 0.88);
+
+  backdrop-filter: blur(6px);
+
+  overflow-y: auto;
+}
+
+
+.confirmation-ticket {
+  width: min(100%, 620px);
+
+  max-height:
+    calc(100dvh - 40px);
+
+  position: relative;
+
+  padding:
+    38px
+    38px
+    42px;
+
+  overflow-y: auto;
+
+  background: #f3efe7;
+
+  color: #16151c;
+
+  border:
+    3px solid #3c2c2a;
+
+  box-shadow:
+    12px 14px 0
+      rgba(0, 0, 0, 0.38),
+    0 30px 80px
+      rgba(0, 0, 0, 0.55);
+
+  animation:
+    ticketEntrance
+    0.25s
+    ease-out;
+}
+
+
+.confirmation-close {
+  width: 36px;
+  height: 36px;
+
+  position: absolute;
+
+  top: 13px;
+  right: 15px;
+
+  border:
+    2px solid #16151c;
+
+  background: #b51219;
+
+  color: white;
+
+  font-size: 24px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    3px 3px 0 #16151c;
+}
+
+
+/* HEADER */
+
+.ticket-header {
+  padding-right: 40px;
+
+  text-align: center;
+}
+
+
+.ticket-icon {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 38px;
+}
+
+
+.ticket-eyebrow {
+  color: #9a740d;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+
+.ticket-header h2 {
+  margin:
+    6px
+    0
+    5px;
+
+  color: #b51219;
+
+  font-size:
+    clamp(
+      25px,
+      5vw,
+      38px
+    );
+
+  font-weight: 900;
+}
+
+
+.ticket-header p {
+  margin: 0;
+
+  color: #756d69;
+
+  font-size: 12px;
+}
+
+
+.ticket-divider {
+  height: 3px;
+
+  margin:
+    25px
+    0;
+
+  background: #3c2c2a;
+
+  transform: rotate(-0.3deg);
+}
+
+
+/* SECCIONES */
+
+.ticket-section {
+  padding:
+    20px
+    0;
+
+  border-bottom:
+    2px dashed
+    rgba(
+      22,
+      21,
+      28,
+      0.28
+    );
+}
+
+
+.ticket-section h3 {
+  margin:
+    0
+    0
+    15px;
+
+  color: #b51219;
+
+  font-size: 14px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+
+.ticket-row {
+  padding:
+    5px
+    0;
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+
+  font-size: 13px;
+}
+
+
+.ticket-row span {
+  color: #756d69;
+}
+
+
+.ticket-row strong {
+  text-align: right;
+}
+
+
+/* ENTREGA */
+
+.delivery-data {
+  margin-bottom: 13px;
+}
+
+
+.delivery-data strong {
+  font-size: 12px;
+}
+
+
+.delivery-data p,
+.pickup-message {
+  margin:
+    4px
+    0
+    0;
+
+  color: #5f5754;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* PRODUCTOS */
+
+.confirmation-item {
+  padding:
+    16px
+    0;
+
+  border-bottom:
+    1px dotted
+    rgba(
+      22,
+      21,
+      28,
+      0.22
+    );
+}
+
+
+.confirmation-item:last-child {
+  border-bottom: none;
+}
+
+
+.item-header {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 15px;
+
+  align-items: flex-start;
+}
+
+
+.item-header strong {
+  font-size: 14px;
+}
+
+
+.item-price {
+  color: #b51219;
+
+  white-space: nowrap;
+}
+
+
+.item-preparation {
+  margin:
+    9px
+    0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.item-preparation span {
+  color: #655d59;
+
+  font-size: 11px;
+}
+
+
+.unit-price {
+  color: #8a817c;
+
+  font-size: 10px;
+}
+
+
+/* INDICACIONES */
+
+.instructions-text {
+  margin: 0;
+
+  padding:
+    12px
+    14px;
+
+  background: #e8dfcf;
+
+  border-left:
+    5px solid #d9a323;
+
+  color: #4f4946;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* TOTAL */
+
+.ticket-total {
+  padding:
+    25px
+    0
+    20px;
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  border-bottom:
+    3px solid #16151c;
+}
+
+
+.ticket-total span {
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+
+.ticket-total strong {
+  color: #b51219;
+
+  font-size: 34px;
+
+  font-weight: 900;
+}
+
+
+/* BOTONES */
+
+.confirmation-actions {
+  margin-top: 25px;
+
+  display: grid;
+
+  grid-template-columns:
+    0.8fr
+    1.2fr;
+
+  gap: 12px;
+}
+
+
+.confirmation-actions button {
+  min-height: 50px;
+
+  padding:
+    12px
+    14px;
+
+  border:
+    3px solid #16151c;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  box-shadow:
+    4px 5px 0 #16151c;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+.correct-button {
+  background: #e8dfcf;
+
+  color: #16151c;
+}
+
+
+.whatsapp-button {
+  background: #1f9d50;
+
+  color: white;
+}
+
+
+.confirmation-actions button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    6px 7px 0 #16151c;
+}
+
+
+.ticket-note {
+  margin:
+    14px
+    0
+    0;
+
+  text-align: center;
+
+  color: #817773;
+
+  font-size: 10px;
+}
+
+
+/* ANIMACIÓN */
+
+@keyframes ticketEntrance {
+
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.94)
+      translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+  }
+
+}
+
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+  .confirmation-backdrop {
+    padding: 12px;
+  }
+
+
+  .confirmation-ticket {
+    max-height:
+      calc(100dvh - 24px);
+
+    padding:
+      32px
+      20px;
+  }
+
+
+  .confirmation-actions {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .whatsapp-button {
+    order: 1;
+  }
+
+
+  .correct-button {
+    order: 2;
+  }
+
+}
