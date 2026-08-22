@@ -111,10 +111,11 @@ async function probarConexion() {
 
 app.listen(
   PORT,
+  '0.0.0.0',
   async () => {
 
     console.log(
-      `🌮 Taco-Verso API en http://localhost:${PORT}`
+      `🌮 Taco-Verso API ejecutándose en puerto ${PORT}`
     );
 
     await probarConexion();
