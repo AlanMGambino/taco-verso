@@ -57,6 +57,12 @@ export class OrderConfirmationComponent {
   @Input()
   total = 0;
 
+  @Input()
+  costoEnvio = 0;
+
+  @Input()
+subtotal = 0;
+
 
   @Output()
   cerrar =
@@ -69,17 +75,6 @@ export class OrderConfirmationComponent {
   @Output()
   enviar =
     new EventEmitter<void>();
-
-
-  get subtotalProductos(): number {
-    return this.carrito.reduce(
-      (total, item) =>
-        total +
-        item.precioUnitario *
-        item.cantidad,
-      0
-    );
-  }
 
 
   cerrarConfirmacion() {

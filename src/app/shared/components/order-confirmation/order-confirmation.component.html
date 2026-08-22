@@ -277,19 +277,55 @@
     </section>
 
 
-    <!-- TOTAL -->
+<!-- RESUMEN -->
 
-    <div class="ticket-total">
+<div class="ticket-summary">
 
-      <span>
-        TOTAL
-      </span>
+  <div class="ticket-row">
 
-      <strong>
-        ${{ total }} MXN
-      </strong>
+    <span>
+      Subtotal
+    </span>
 
-    </div>
+    <strong>
+      ${{ subtotal }} MXN
+    </strong>
+
+  </div>
+
+  <div
+    class="ticket-row"
+    *ngIf="
+      datosCliente?.tipoEntrega ===
+      'domicilio'
+    ">
+
+    <span>
+      🛵 Envío a domicilio
+    </span>
+
+    <strong>
+      ${{ costoEnvio }} MXN
+    </strong>
+
+  </div>
+
+</div>
+
+
+<!-- TOTAL -->
+
+<div class="ticket-total">
+
+  <span>
+    TOTAL
+  </span>
+
+  <strong>
+    ${{ total }} MXN
+  </strong>
+
+</div>
 
 
     <!-- BOTONES -->

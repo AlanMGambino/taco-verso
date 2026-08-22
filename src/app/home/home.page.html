@@ -805,12 +805,12 @@
         <div>
 
           <span>
-            Total
-          </span>
+  Subtotal
+</span>
 
-          <strong>
-            ${{ totalPedido }}
-          </strong>
+<strong>
+  ${{ totalPedido }}
+</strong>
 
         </div>
 
@@ -872,6 +872,8 @@
 
   [total]="totalPedido"
 
+  [costoEnvio]="costoEnvio"
+
   [cantidadProductos]="cantidadProductos"
 
   (cerrar)="cerrarCheckout()"
@@ -890,7 +892,11 @@
 
   [datosCliente]="datosCliente"
 
-  [total]="totalPedido"
+  [subtotal]="totalPedido"
+
+  [costoEnvio]="costoEnvioActual"
+
+  [total]="totalFinalPedido"
 
   (cerrar)="cerrarConfirmacion()"
 

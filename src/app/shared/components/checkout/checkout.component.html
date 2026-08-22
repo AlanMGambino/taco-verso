@@ -240,32 +240,58 @@
 
     <div class="checkout-summary">
 
-      <div>
+  <div>
 
-        <span>
-          Productos
-        </span>
+    <span>
+      Productos
+    </span>
 
-        <strong>
-          {{ cantidadProductos }}
-        </strong>
+    <strong>
+      {{ cantidadProductos }}
+    </strong>
 
-      </div>
+  </div>
 
+  <div>
 
-      <div class="summary-total">
+    <span>
+      Subtotal
+    </span>
 
-        <span>
-          Total
-        </span>
+    <strong>
+      ${{ total }}
+    </strong>
 
-        <strong>
-          ${{ total }}
-        </strong>
+  </div>
 
-      </div>
+  <div
+    *ngIf="
+      tipoEntrega === 'domicilio'
+    ">
 
-    </div>
+    <span>
+      Envío a domicilio
+    </span>
+
+    <strong>
+      ${{ envioActual }}
+    </strong>
+
+  </div>
+
+  <div class="summary-total">
+
+    <span>
+      Total
+    </span>
+
+    <strong>
+      ${{ totalFinal }}
+    </strong>
+
+  </div>
+
+</div>
 
 
     <!-- CONTINUAR -->

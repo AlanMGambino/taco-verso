@@ -2,7 +2,9 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output
+  Output,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 
 
@@ -31,7 +33,14 @@ export interface DatosCheckout {
   styleUrls: ['./checkout.component.scss'],
   standalone: false
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnChanges {
+
+  @Input()
+costoEnvio = 15;
+
+envioActual = 0;
+
+totalFinal = 0;
 
   @Input()
   visible = false;
@@ -72,15 +81,17 @@ export class CheckoutComponent {
 
 
   seleccionarEntrega(
-    tipo:
-      'domicilio' | 'pickup'
-  ) {
+  tipo:
+    'domicilio' | 'pickup'
+) {
 
-    this.tipoEntrega = tipo;
+  this.tipoEntrega = tipo;
 
-    this.error = '';
+  this.error = '';
 
-  }
+  this.actualizarTotales();
+
+}
 
 
   cerrarCheckout() {
@@ -196,5 +207,34 @@ export class CheckoutComponent {
     this.continuar.emit(datos);
 
   }
+
+  actualizarTotales() {
+
+  this.envioActual =
+    this.tipoEntrega === 'domicilio'
+      ? this.costoEnvio
+      : 0;
+
+  this.totalFinal =
+    this.total +
+    this.envioActual;
+
+}
+
+ngOnChanges(
+  changes: SimpleChanges
+) {
+
+  if (
+    changes['total'] ||
+    changes['costoEnvio'] ||
+    changes['visible']
+  ) {
+
+    this.actualizarTotales();
+
+  }
+
+}
 
 }

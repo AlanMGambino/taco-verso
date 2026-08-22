@@ -97,6 +97,11 @@ productosDisponibilidad: ProductoEstado[] = [];
 totalPedido = 0;
 cantidadProductos = 0;
 
+readonly costoEnvio = 15;
+
+costoEnvioActual = 0;
+
+totalFinalPedido = 0;
 
   /* =========================================
      PERSONALIZADOR
@@ -468,7 +473,12 @@ this.recalcularCarrito();
     0
   );
 
+  // Recalcula subtotal + envío
+  this.recalcularTotalFinal();
+
+  // Actualiza la vista
   this.cdr.detectChanges();
+
 }
 
   /* =========================================
@@ -508,6 +518,8 @@ recibirDatosCheckout(
 ) {
 
   this.datosCliente = datos;
+
+  this.recalcularTotalFinal();
 
   this.checkoutVisible = false;
 
@@ -580,6 +592,9 @@ enviarPedidoWhatsApp() {
         `🔎 Referencia: ${this.datosCliente.referencia}\n`;
 
     }
+
+     mensaje +=
+    `🛵 Costo de envío: $${this.costoEnvio} MXN\n`;
 
     mensaje += '\n';
 
@@ -718,7 +733,21 @@ enviarPedidoWhatsApp() {
 
   mensaje += '\n';
   mensaje += '━━━━━━━━━━━━━━━━━━━━\n';
-  mensaje += `💰 *TOTAL: $${this.totalPedido} MXN*\n`;
+  mensaje +=
+  `🛒 Subtotal: $${this.totalPedido} MXN\n`;
+
+if (
+  this.datosCliente.tipoEntrega ===
+  'domicilio'
+) {
+
+  mensaje +=
+    `🛵 Envío: $${this.costoEnvio} MXN\n`;
+
+}
+
+mensaje +=
+  `💰 *TOTAL: $${this.totalFinalPedido} MXN*\n`;
   mensaje += '━━━━━━━━━━━━━━━━━━━━\n\n';
 
   mensaje +=
@@ -752,6 +781,20 @@ scrollToOrder() {
     behavior: 'smooth',
     block: 'start'
   });
+
+}
+
+private recalcularTotalFinal() {
+
+  this.costoEnvioActual =
+    this.datosCliente?.tipoEntrega ===
+      'domicilio'
+      ? this.costoEnvio
+      : 0;
+
+  this.totalFinalPedido =
+    this.totalPedido +
+    this.costoEnvioActual;
 
 }
 
