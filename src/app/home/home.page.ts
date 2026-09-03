@@ -90,7 +90,7 @@ export class HomePage {
 
   carrito: ItemCarrito[] = [];
 
-  negocioAbierto = true;
+  negocioAbierto = false;
 
 productosDisponibilidad: ProductoEstado[] = [];
 
@@ -194,7 +194,7 @@ totalFinalPedido = 0;
 
   return producto
     ? producto.disponible
-    : true;
+    : false;
 }
 
   /* =========================================
