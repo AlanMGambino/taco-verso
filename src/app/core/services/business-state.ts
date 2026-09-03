@@ -83,7 +83,7 @@ export class BusinessState {
 
 
   private negocioAbiertoSubject =
-    new BehaviorSubject<boolean>(true);
+    new BehaviorSubject<boolean>(false);
 
 
   negocioAbierto$ =
